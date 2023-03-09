@@ -1,4 +1,4 @@
-package com.firebaseapp.newarchitecture.modules;
+package com.raphaelsr.firebaseApp.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

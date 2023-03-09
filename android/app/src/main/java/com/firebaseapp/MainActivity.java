@@ -1,4 +1,4 @@
-package com.firebaseapp;
+package com.raphaelsr.firebaseApp;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
