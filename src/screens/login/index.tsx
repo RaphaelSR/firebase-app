@@ -1,34 +1,29 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Text, Button, TextInput, useTheme} from 'react-native-paper';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import ArrowBack from '../../components/arrowBack';
 import {useAuth} from '../../hooks/useAuth';
 
-export default function SignUp() {
+export default function Login({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordSecure, setIsPasswordSecure] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const {signup} = useAuth();
+  const {login} = useAuth();
   const {colors} = useTheme();
 
-  const handleSignUp = async () => {
+  const handleLogin = async () => {
     try {
       setLoading(true);
       setError('');
       if (!email || !password) {
-        throw new Error('Preencha todos os campos');
+        setError('Por favor, informe seu email e senha.');
+      } else {
+        await login(email, password);
       }
-      console.log('Email: ', email);
-      console.log('Senha: ', password);
-      await signup(email, password);
     } catch (e) {
-      setError(
-        'Falha ao cadastrar. Verifique suas credenciais e tente novamente.',
-      );
+      setError('Falha no login. Verifique suas credenciais e tente novamente.');
     } finally {
       setLoading(false);
     }
@@ -40,11 +35,11 @@ export default function SignUp() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ArrowBack />
       <View style={styles.content}>
         <Text variant="displayMedium" style={{color: colors.primary}}>
-          Signup
+          Login
         </Text>
+
         <View style={styles.form}>
           <TextInput
             style={styles.input}
@@ -69,13 +64,28 @@ export default function SignUp() {
           />
           <Button
             mode="contained"
-            onPress={handleSignUp}
+            onPress={handleLogin}
             style={styles.button}
             disabled={loading}
             loading={loading}>
-            Cadastrar
+            Entrar
           </Button>
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
+          <View style={styles.signUpAndReset}>
+            <Text style={styles.signUpText}>
+              Ainda não tem uma conta?{' '}
+              <Text
+                style={styles.signUpLink}
+                onPress={() => navigation.navigate('Signup')}>
+                Cadastre-se aqui
+              </Text>
+            </Text>
+            <Text
+              style={styles.resetPassword}
+              onPress={() => navigation.navigate('ResetPassword')}>
+              Esqueceu sua senha?
+            </Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -106,5 +116,20 @@ const styles = StyleSheet.create({
     color: 'red',
     marginTop: 8,
     textAlign: 'center',
+  },
+  signUpAndReset: {
+    marginTop: 16,
+    alignItems: 'center',
+  },
+  signUpText: {
+    color: '#888',
+    textAlign: 'center',
+  },
+  signUpLink: {
+    color: 'blue',
+  },
+  resetPassword: {
+    color: 'blue',
+    marginTop: 8,
   },
 });

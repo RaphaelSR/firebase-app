@@ -1,8 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Login from '../pages/login';
-import SignUp from '../pages/signup';
-import ResetPassword from '../pages/resetPassword';
+import Login from '../screens/login';
+import SignUp from '../screens/signup';
+import ResetPassword from '../screens/resetPassword';
 
 const AuthStack = createNativeStackNavigator();
 
