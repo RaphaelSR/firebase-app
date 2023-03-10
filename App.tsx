@@ -1,6 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {store} from './src/store';
+import {persistor, store} from './src/store';
+import {PersistGate} from 'redux-persist/integration/react';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {Routes} from './src/router';
 
@@ -17,9 +18,11 @@ const theme = {
 export default function App() {
   return (
     <Provider store={store}>
-      <PaperProvider theme={theme}>
-        <Routes />
-      </PaperProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <PaperProvider theme={theme}>
+          <Routes />
+        </PaperProvider>
+      </PersistGate>
     </Provider>
   );
 }
