@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react';
+import {useDispatch} from 'react-redux';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-
-interface User extends FirebaseAuthTypes.User {
-  email: string;
-}
+import {signInRequest} from '../store/user/actions';
+import {User} from '../store/user/types';
 
 interface AuthData {
   token: string | null;
@@ -18,6 +17,7 @@ export function useAuth(): AuthData {
   const [token, setToken] = useState<string | null>(null);
   const [initializing, setInitializing] = useState<boolean>(true);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const dispatch = useDispatch();
 
   function onAuthStateChanged(user: FirebaseAuthTypes.User | null) {
     setCurrentUser(user as User | null);
@@ -32,11 +32,7 @@ export function useAuth(): AuthData {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const userCredential = await auth().signInWithEmailAndPassword(
-      email,
-      password,
-    );
-    setToken(userCredential.user.uid);
+    dispatch(signInRequest(email, password));
   };
 
   const signup = async (email: string, password: string) => {
@@ -52,7 +48,6 @@ export function useAuth(): AuthData {
   };
 
   const logout = () => {
-    ('logout');
     auth()
       .signOut()
       .then(() => {});
