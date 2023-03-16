@@ -6,7 +6,6 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
-  SafeAreaView,
 } from "react-native";
 import { Avatar, IconButton, useTheme } from "react-native-paper";
 import CustomModal from "../../components/modal";
@@ -20,6 +19,7 @@ import {
 } from "../../store/todo/actions";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootState } from "../../store/rootState";
+import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
 
 type HomeScreenNavigationProp = NativeStackScreenProps<any>;
 
@@ -59,9 +59,7 @@ export function Home({ navigation }: HomeProps) {
   }, [dispatch]);
 
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
+    <SafeAreaViewWrapper>
       <View style={styles.content}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
@@ -141,14 +139,11 @@ export function Home({ navigation }: HomeProps) {
           onConfirm={handleLogout}
         />
       </View>
-    </SafeAreaView>
+    </SafeAreaViewWrapper>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   content: {
     paddingHorizontal: 16,
   },

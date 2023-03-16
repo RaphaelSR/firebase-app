@@ -1,31 +1,31 @@
-import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Text, Button, TextInput, useTheme} from 'react-native-paper';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import ArrowBack from '../../components/arrowBack';
-import {useAuth} from '../../hooks/useAuth';
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
+import { Text, Button, TextInput, useTheme } from "react-native-paper";
+import ArrowBack from "../../components/arrowBack";
+import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function SignUp() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const {signup} = useAuth();
-  const {colors} = useTheme();
+  const { signup } = useAuth();
+  const { colors } = useTheme();
 
   const handleSignUp = async () => {
     try {
       setLoading(true);
-      setError('');
+      setError("");
       if (!email || !password) {
-        throw new Error('Preencha todos os campos');
+        throw new Error("Preencha todos os campos");
       }
       await signup(email, password);
     } catch (e) {
       setError(
-        'Falha ao cadastrar. Verifique suas credenciais e tente novamente.',
+        "Falha ao cadastrar. Verifique suas credenciais e tente novamente."
       );
     } finally {
       setLoading(false);
@@ -37,10 +37,10 @@ export default function SignUp() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaViewWrapper>
       <ArrowBack />
       <View style={styles.content}>
-        <Text variant="displayMedium" style={{color: colors.primary}}>
+        <Text variant="displayMedium" style={{ color: colors.primary }}>
           Signup
         </Text>
         <View style={styles.form}>
@@ -60,7 +60,7 @@ export default function SignUp() {
             right={
               <TextInput.Icon
                 onPress={togglePasswordVisibility}
-                icon={isPasswordSecure ? 'eye-off' : 'eye'}
+                icon={isPasswordSecure ? "eye-off" : "eye"}
               />
             }
             mode="outlined"
@@ -70,39 +70,37 @@ export default function SignUp() {
             onPress={handleSignUp}
             style={styles.button}
             disabled={loading}
-            loading={loading}>
+            loading={loading}
+          >
             Cadastrar
           </Button>
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
         </View>
       </View>
-    </SafeAreaView>
+    </SafeAreaViewWrapper>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   content: {
     flex: 1,
     paddingHorizontal: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   input: {
     marginTop: 8,
   },
   form: {
-    width: '100%',
+    width: "100%",
     marginTop: 16,
   },
   button: {
     marginTop: 16,
   },
   errorText: {
-    color: 'red',
+    color: "red",
     marginTop: 8,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });

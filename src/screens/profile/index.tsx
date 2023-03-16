@@ -1,17 +1,10 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Switch,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, View, Text, TextInput, Switch } from "react-native";
 import { Avatar, Button, useTheme } from "react-native-paper";
 import CustomModal from "../../components/modal";
 import { useAuth } from "../../hooks/useAuth";
 import ArrowBack from "../../components/arrowBack";
+import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
 
 export function Profile({ navigation }) {
   const { currentUser, resetPassword, logout } = useAuth();
@@ -27,7 +20,7 @@ export function Profile({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+    <SafeAreaViewWrapper>
       <View style={styles.content}>
         <View style={styles.header}>
           <ArrowBack />
@@ -48,7 +41,9 @@ export function Profile({ navigation }) {
             editable={false}
           />
           <View style={styles.darkModeContainer}>
-            <Text style={[styles.label, { color: colors.text }]}>Dark Mode</Text>
+            <Text style={[styles.label, { color: colors.text }]}>
+              Dark Mode
+            </Text>
             <Switch
               trackColor={{ false: "#767577", true: colors.primary }}
               thumbColor={darkMode ? colors.primary : "#f4f3f4"}
@@ -82,7 +77,7 @@ export function Profile({ navigation }) {
           onConfirm={handleResetPassword}
         />
       </View>
-    </SafeAreaView>
+    </SafeAreaViewWrapper>
   );
 }
 
@@ -116,8 +111,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     marginBottom: 16,
     color: "#ffffff",
-    backgroundColor: "#8e8e8e", 
-    opacity: 0.6, 
+    backgroundColor: "#8e8e8e",
+    opacity: 0.6,
   },
   darkModeContainer: {
     flexDirection: "row",

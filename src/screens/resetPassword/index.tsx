@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {Text, Button, TextInput, useTheme} from 'react-native-paper';
-import ArrowBack from '../../components/arrowBack';
-import {useAuth} from '../../hooks/useAuth';
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { Text, Button, TextInput, useTheme } from "react-native-paper";
+import ArrowBack from "../../components/arrowBack";
+import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function ResetPassword() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
 
-  const {resetPassword} = useAuth();
-  const {colors} = useTheme();
+  const { resetPassword } = useAuth();
+  const { colors } = useTheme();
 
   const handleResetPassword = () => {
     if (!email) {
@@ -21,10 +22,10 @@ export default function ResetPassword() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaViewWrapper>
       <ArrowBack />
       <View style={styles.content}>
-        <Text variant="displayMedium" style={{color: colors.primary}}>
+        <Text variant="displayMedium" style={{ color: colors.primary }}>
           Reset Password
         </Text>
         <View style={styles.form}>
@@ -44,37 +45,35 @@ export default function ResetPassword() {
           <Button
             mode="contained"
             onPress={handleResetPassword}
-            style={styles.button}>
+            style={styles.button}
+          >
             Reset Password
           </Button>
         </View>
       </View>
-    </SafeAreaView>
+    </SafeAreaViewWrapper>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   content: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     paddingHorizontal: 16,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   input: {
     marginTop: 8,
   },
   form: {
-    width: '100%',
+    width: "100%",
     marginTop: 16,
   },
   button: {
     marginTop: 16,
   },
   errorText: {
-    color: 'red',
+    color: "red",
     fontSize: 12,
     marginTop: 4,
   },

@@ -1,29 +1,30 @@
-import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {Text, Button, TextInput, useTheme} from 'react-native-paper';
-import {useAuth} from '../../hooks/useAuth';
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { Text, Button, TextInput, useTheme } from "react-native-paper";
+import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
+import { useAuth } from "../../hooks/useAuth";
 
-export default function Login({navigation}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function Login({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const {login} = useAuth();
-  const {colors} = useTheme();
+  const { login } = useAuth();
+  const { colors } = useTheme();
 
   const handleLogin = async () => {
     try {
       setLoading(true);
-      setError('');
+      setError("");
       if (!email || !password) {
-        setError('Por favor, informe seu email e senha.');
+        setError("Por favor, informe seu email e senha.");
       } else {
         await login(email, password);
       }
     } catch (e) {
-      setError('Falha no login. Verifique suas credenciais e tente novamente.');
+      setError("Falha no login. Verifique suas credenciais e tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -34,9 +35,9 @@ export default function Login({navigation}) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaViewWrapper>
       <View style={styles.content}>
-        <Text variant="displayMedium" style={{color: colors.primary}}>
+        <Text variant="displayMedium" style={{ color: colors.primary }}>
           Login
         </Text>
 
@@ -57,7 +58,7 @@ export default function Login({navigation}) {
             right={
               <TextInput.Icon
                 onPress={togglePasswordVisibility}
-                icon={isPasswordSecure ? 'eye-off' : 'eye'}
+                icon={isPasswordSecure ? "eye-off" : "eye"}
               />
             }
             mode="outlined"
@@ -67,69 +68,69 @@ export default function Login({navigation}) {
             onPress={handleLogin}
             style={styles.button}
             disabled={loading}
-            loading={loading}>
+            loading={loading}
+          >
             Entrar
           </Button>
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
           <View style={styles.signUpAndReset}>
             <Text style={styles.signUpText}>
-              Ainda não tem uma conta?{' '}
+              Ainda não tem uma conta?{" "}
               <Text
                 style={styles.signUpLink}
-                onPress={() => navigation.navigate('Signup')}>
+                onPress={() => navigation.navigate("Signup")}
+              >
                 Cadastre-se aqui
               </Text>
             </Text>
             <Text
               style={styles.resetPassword}
-              onPress={() => navigation.navigate('ResetPassword')}>
+              onPress={() => navigation.navigate("ResetPassword")}
+            >
               Esqueceu sua senha?
             </Text>
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </SafeAreaViewWrapper>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   content: {
     flex: 1,
     paddingHorizontal: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   input: {
     marginTop: 8,
   },
   form: {
-    width: '100%',
+    width: "100%",
     marginTop: 16,
   },
   button: {
     marginTop: 16,
   },
   errorText: {
-    color: 'red',
+    color: "red",
     marginTop: 8,
-    textAlign: 'center',
+    textAlign: "center",
   },
   signUpAndReset: {
     marginTop: 16,
-    alignItems: 'center',
+    alignItems: "center",
   },
   signUpText: {
-    color: '#888',
-    textAlign: 'center',
+    color: "#888",
+    textAlign: "center",
   },
   signUpLink: {
-    color: 'blue',
+    color: "blue",
   },
   resetPassword: {
-    color: 'blue',
+    color: "blue",
     marginTop: 8,
   },
 });
