@@ -10,7 +10,10 @@ export function AuthRoutes() {
   return (
     <AuthStack.Navigator
       initialRouteName="Login"
-      screenOptions={{headerShown: false}}>
+      screenOptions={{
+        headerShown: false,
+        headerTransparent: true,
+      }}>
       <AuthStack.Screen name="Login" component={Login} />
       <AuthStack.Screen name="ResetPassword" component={ResetPassword} />
       <AuthStack.Screen name="Signup" component={SignUp} />
