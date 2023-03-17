@@ -5,12 +5,13 @@ import { useAuth } from "../../hooks/useAuth";
 import ArrowBack from "../../components/arrowBack";
 import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
 import { ModalContext } from "../../contexts/modalContext";
+import { useThemeContext } from "../../contexts/themeContext";
 
 export function Profile({ navigation }) {
   const { currentUser, resetPassword, logout } = useAuth();
-  const [darkMode, setDarkMode] = useState(false);
   const { colors } = useTheme();
   const { showModal, hideModal } = useContext(ModalContext);
+  const { isDarkMode, toggleTheme } = useThemeContext();
 
   const handleResetPassword = () => {
     if (currentUser?.email) {
@@ -58,10 +59,10 @@ export function Profile({ navigation }) {
             </Text>
             <Switch
               trackColor={{ false: "#767577", true: colors.primary }}
-              thumbColor={darkMode ? colors.primary : "#f4f3f4"}
+              thumbColor={isDarkMode ? colors.primary : "#f4f3f4"}
               ios_backgroundColor="#3e3e3e"
-              onValueChange={setDarkMode}
-              value={darkMode}
+              onValueChange={toggleTheme}
+              value={isDarkMode}
             />
           </View>
           <Button
