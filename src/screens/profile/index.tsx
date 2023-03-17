@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, View, Text, TextInput, Switch } from "react-native";
 import { Avatar, Button, useTheme } from "react-native-paper";
-import CustomModal from "../../components/modal";
 import { useAuth } from "../../hooks/useAuth";
 import ArrowBack from "../../components/arrowBack";
 import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
+import { ModalContext } from "../../contexts/modalContext";
 
 export function Profile({ navigation }) {
   const { currentUser, resetPassword, logout } = useAuth();
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const { colors } = useTheme();
+  const { showModal, hideModal } = useContext(ModalContext);
 
   const handleResetPassword = () => {
     if (currentUser?.email) {
       resetPassword(currentUser.email);
     }
-    setIsModalVisible(false);
+    hideModal();
+  };
+
+  const handleLogout = () => {
+    showModal({
+      message: "Are you sure you want to logout?",
+      onConfirm: () => {
+        logout();
+        hideModal();
+      },
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    });
   };
 
   return (
@@ -54,7 +66,14 @@ export function Profile({ navigation }) {
           </View>
           <Button
             mode="outlined"
-            onPress={() => setIsModalVisible(true)}
+            onPress={() =>
+              showModal({
+                message: "Are you sure you want to reset your password?",
+                onConfirm: handleResetPassword,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+              })
+            }
             style={[styles.button, { borderColor: colors.text }]}
             color={colors.text}
           >
@@ -62,20 +81,13 @@ export function Profile({ navigation }) {
           </Button>
           <Button
             mode="outlined"
-            onPress={logout}
+            onPress={handleLogout}
             style={[styles.button, { borderColor: colors.text }]}
             color={colors.text}
           >
             Logout
           </Button>
         </View>
-        <CustomModal
-          visible={isModalVisible}
-          onDismiss={() => setIsModalVisible(false)}
-          title="Reset Password"
-          confirmationMessage="Are you sure you want to reset your password?"
-          onConfirm={handleResetPassword}
-        />
       </View>
     </SafeAreaViewWrapper>
   );

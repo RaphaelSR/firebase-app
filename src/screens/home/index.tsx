@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Avatar, IconButton, useTheme } from "react-native-paper";
-import CustomModal from "../../components/modal";
 import { useAuth } from "../../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -131,13 +130,7 @@ export function Home({ navigation }: HomeProps) {
           keyExtractor={(item) => item.id}
           style={styles.noteList}
         />
-        <CustomModal
-          visible={isLogoutModalVisible}
-          onDismiss={() => setIsLogoutModalVisible(false)}
-          title="Sair da sua conta?"
-          confirmationMessage="Você tem certeza que deseja sair da sua conta?"
-          onConfirm={handleLogout}
-        />
+
       </View>
     </SafeAreaViewWrapper>
   );
