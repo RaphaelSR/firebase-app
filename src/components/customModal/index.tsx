@@ -1,8 +1,13 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { Modal, Portal, Text, useTheme } from "react-native-paper";
+
 import { ModalContext } from "../../contexts/modalContext";
+import { createStyles } from "./styles";
 
 const CustomModal: React.FC = () => {
+  const styles = createStyles();
+  const { colors } = useTheme();
   const {
     modalVisible,
     hideModal,
@@ -18,8 +23,13 @@ const CustomModal: React.FC = () => {
   }
 
   return (
-    <View style={styles.modalOverlay}>
-      <View style={styles.modalContent}>
+    <Portal>
+      <Modal
+        visible={modalVisible}
+        onDismiss={hideModal}
+        contentContainerStyle={styles.modalContent}
+        dismissable={!!modalContent}
+      >
         {modalContent ? (
           <>
             {modalMessage && (
@@ -51,40 +61,9 @@ const CustomModal: React.FC = () => {
             </View>
           </>
         )}
-      </View>
-    </View>
+      </Modal>
+    </Portal>
   );
 };
-
-const styles = StyleSheet.create({
-  modalOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContent: {
-    backgroundColor: "white",
-    borderRadius: 10,
-    padding: 20,
-    maxWidth: "80%",
-  },
-  modalMessage: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  modalButtons: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-  },
-  modalButtonText: {
-    fontSize: 16,
-    color: "blue",
-  },
-});
 
 export default CustomModal;

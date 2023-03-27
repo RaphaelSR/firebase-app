@@ -75,55 +75,6 @@ export function Profile({ navigation }) {
     }
   };
 
-  const AvatarOptions = () => {
-    return (
-      <View style={styles.modalView}>
-        <Text style={styles.modalTitle}>Choose an option</Text>
-        <Button onPress={handleViewAvatar}>View current photo</Button>
-        <Button onPress={() => handleChooseAvatar("camera")}>
-          Take a new photo
-        </Button>
-        <Button onPress={() => handleChooseAvatar("gallery")}>
-          Choose from gallery
-        </Button>
-        <Button onPress={hideModal}>Cancel</Button>
-      </View>
-    );
-  };
-
-  const handleViewAvatar = () => {
-    // Implementar a lógica para visualizar a foto do avatar.
-  };
-  const handleChooseAvatar = async (source: string) => {
-    const options: {
-      mediaType: MediaType;
-      includeBase64: boolean;
-      maxHeight: number;
-      maxWidth: number;
-    } = {
-      mediaType: "photo",
-      includeBase64: false,
-      maxHeight: 200,
-      maxWidth: 200,
-    };
-
-    const callback: Callback = async (response) => {
-      if (response.didCancel) {
-        console.log("User cancelled image picker");
-      } else if (response.errorCode) {
-        console.log("ImagePicker Error: ", response.errorMessage);
-      } else if (response.assets) {
-        await uploadAvatar(response.assets[0].uri || "");
-      }
-    };
-
-    if (source === "camera") {
-      launchCamera(options, callback);
-    } else if (source === "gallery") {
-      launchImageLibrary(options, callback);
-    }
-  };
-
   return (
     <SafeAreaViewWrapper>
       <View style={styles.container}>
@@ -135,8 +86,8 @@ export function Profile({ navigation }) {
               displayName={currentUser?.displayName}
               gradientColors={[colors.primary, colors.primaryVariant]}
               size={70}
-              onPress={() => showModal({ content: <AvatarOptions /> })}
               style={styles.avatar}
+              originScreen="profile"
             />
           </View>
           <View style={styles.infoContainer}>
@@ -174,7 +125,6 @@ export function Profile({ navigation }) {
                 })
               }
               style={styles.button}
-              color={colors.text}
             >
               Reset Password
             </Button>

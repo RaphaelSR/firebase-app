@@ -24,20 +24,6 @@ export const createStyles = () => {
       height: "100%",
       resizeMode: "contain",
     },
-    modalView: {
-      backgroundColor: colors.background,
-      padding: 16,
-      borderRadius: 8,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    modalTitle: {
-      fontSize: 18,
-      fontWeight: "bold",
-      marginBottom: 16,
-      textAlign: "center",
-      color: colors.text,
-    },
     avatar: {
       marginTop: 8,
       marginBottom: 8,
