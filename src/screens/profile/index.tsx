@@ -21,6 +21,7 @@ import {
   Callback,
 } from "react-native-image-picker";
 import { AvatarWithGradient } from "../../components/avatarWithGradient.tsx";
+import { DisplayNameInput } from "../../components/displayNameInput";
 
 export function Profile({ navigation }) {
   const {
@@ -139,25 +140,13 @@ export function Profile({ navigation }) {
             />
           </View>
           <View style={styles.infoContainer}>
-            <Text style={styles.label}>Display Name</Text>
-            <TextInput
-              style={[
-                styles.textInput,
-                {
-                  backgroundColor: colors.surface,
-                  color: colors.text,
-                  borderColor: isTextInputFocused
-                    ? colors.primary
-                    : colors.placeholder,
-                },
-              ]}
-              value={displayName}
-              placeholder="Type your first name"
-              onChangeText={setDisplayName}
-              onSubmitEditing={handleUpdateDisplayName}
-              onFocus={() => setIsTextInputFocused(true)}
-              onBlur={() => setIsTextInputFocused(false)}
-            />
+          <DisplayNameInput
+            displayName={displayName}
+            setDisplayName={setDisplayName}
+            handleUpdateDisplayName={handleUpdateDisplayName}
+            isTextInputFocused={isTextInputFocused}
+            setIsTextInputFocused={setIsTextInputFocused}
+          />
             <Text style={styles.label}>Email</Text>
             <TextInput
               style={styles.textInput}
