@@ -1,7 +1,6 @@
 # Firebase App
 
-Este projeto é um aplicativo simples que utiliza a plataforma Firebase para autenticação e armazenamento de dados em nuvem. O aplicativo é desenvolvido em React Native.
-
+Este projeto é um aplicativo simples que utiliza a plataforma Firebase para autenticação e armazenamento de dados em nuvem. O aplicativo é desenvolvido em React Native e tem como principal objetivo servir como treino
 ## Pré-requisitos
 
 Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em seu sistema:
@@ -16,7 +15,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 Clone este repositório em sua máquina:
 
 ```
-git clone https://github.com/seu-usuario/firebase-app.git
+git clone https://github.com/raphaelsr/firebase-app.git
 Navegue até o diretório raiz do projeto e instale as dependências:
 
 cd firebase-app

@@ -51,7 +51,16 @@ function* updateTodo({
   payload: { id, title, completed },
 }: ReturnType<typeof updateTodoRequest>) {
   try {
-    const todoDocRef = firestore().collection("todos").doc(id);
+    const currentUser = auth().currentUser;
+    if (!currentUser) {
+      throw new Error("User not logged in.");
+    }
+    const userId = currentUser.uid;
+    const todoDocRef = firestore()
+      .collection("users")
+      .doc(userId)
+      .collection("todos")
+      .doc(id);
     const updatedTodoData: Partial<Todo> = {
       title,
       completed,
@@ -73,8 +82,19 @@ function* deleteTodo({
   payload: { id },
 }: ReturnType<typeof deleteTodoRequest>) {
   try {
-    const todoDocRef = firestore().collection("todos").doc(id);
+    const currentUser = auth().currentUser;
+    if (!currentUser) {
+      throw new Error("User not logged in.");
+    }
+    const userId = currentUser.uid;
+    const todoDocRef = firestore()
+      .collection("users")
+      .doc(userId)
+      .collection("todos")
+      .doc(id);
+
     yield call(() => todoDocRef.delete());
+
     yield put(deleteTodoSuccess(id));
   } catch (error) {
     yield put(deleteTodoFailure());

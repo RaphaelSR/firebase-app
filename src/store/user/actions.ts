@@ -21,3 +21,8 @@ export const signOutRequest = () => ({
 export const signOutSuccess = () => ({
   type: UserActionTypes.SIGN_OUT_SUCCESS,
 });
+
+export const updateAvatarURL = (uid: string, avatarURL: string) => ({
+  type: UserActionTypes.UPDATE_AVATAR_URL,
+  payload: { uid, avatarURL },
+});

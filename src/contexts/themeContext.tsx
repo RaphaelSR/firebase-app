@@ -4,7 +4,7 @@ import {
   MD3DarkTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
-import { TwitterDarkTheme, TwitterLightTheme } from "../styles/themes";
+import { MaterialDarkTheme, MaterialLightTheme } from "../styles/themes";
 
 const ThemeContext = createContext<{
   isDarkMode: boolean;
@@ -25,7 +25,7 @@ export const ThemeProvider: React.FC<React.PropsWithChildren<{}>> = ({
     setIsDarkMode(!isDarkMode);
   };
 
-  const theme = isDarkMode ? TwitterDarkTheme : TwitterLightTheme;
+  const theme = isDarkMode ? MaterialDarkTheme : MaterialLightTheme;
 
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>

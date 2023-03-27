@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
+import { createStyles } from "./styles";
 import { Text, Button, TextInput, useTheme } from "react-native-paper";
 import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
 import { useAuth } from "../../hooks/useAuth";
@@ -10,9 +11,9 @@ export default function Login({ navigation }) {
   const [isPasswordSecure, setIsPasswordSecure] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const { login } = useAuth();
+  const styles = createStyles();
   const { colors } = useTheme();
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     try {
@@ -95,42 +96,3 @@ export default function Login({ navigation }) {
     </SafeAreaViewWrapper>
   );
 }
-
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    marginTop: 8,
-  },
-  form: {
-    width: "100%",
-    marginTop: 16,
-  },
-  button: {
-    marginTop: 16,
-  },
-  errorText: {
-    color: "red",
-    marginTop: 8,
-    textAlign: "center",
-  },
-  signUpAndReset: {
-    marginTop: 16,
-    alignItems: "center",
-  },
-  signUpText: {
-    color: "#888",
-    textAlign: "center",
-  },
-  signUpLink: {
-    color: "blue",
-  },
-  resetPassword: {
-    color: "blue",
-    marginTop: 8,
-  },
-});

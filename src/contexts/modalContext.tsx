@@ -2,7 +2,8 @@ import React, { createContext, useCallback, useState, ReactNode } from "react";
 
 interface ModalContextData {
   showModal: (options: {
-    message: string;
+    message?: string;
+    content?: ReactNode;
     onConfirm?: () => void;
     confirmButtonText?: string;
     cancelButtonText?: string;
@@ -13,6 +14,7 @@ interface ModalContextData {
   modalOnConfirm?: () => void;
   modalConfirmButtonText?: string;
   modalCancelButtonText?: string;
+  modalContent?: ReactNode;
 }
 
 interface ModalConfig {
@@ -38,10 +40,11 @@ export const ModalProvider: React.FC<React.PropsWithChildren<{}>> = ({
 
   const showModal = useCallback(
     (options: {
-      message: string;
+      message?: string;
       onConfirm?: () => void;
       confirmButtonText?: string;
       cancelButtonText?: string;
+      content?: ReactNode;
     }) => {
       setModalConfig(options);
       setModalVisible(true);
@@ -63,6 +66,7 @@ export const ModalProvider: React.FC<React.PropsWithChildren<{}>> = ({
         modalOnConfirm: modalConfig.onConfirm,
         modalConfirmButtonText: modalConfig.confirmButtonText,
         modalCancelButtonText: modalConfig.cancelButtonText,
+        modalContent: modalConfig.content,
       }}
     >
       {children}

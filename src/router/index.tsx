@@ -10,11 +10,11 @@ export function Routes() {
   const { currentUser } = useAuth();
 
   return (
-    <NavigationContainer>
-      <ModalProvider>
-        {currentUser ? <AppRoutes /> : <AuthRoutes />}
-        <CustomModal />
-      </ModalProvider>
-    </NavigationContainer>
+      <NavigationContainer>
+        <ModalProvider>
+          {currentUser ? <AppRoutes /> : <AuthRoutes />}
+          <CustomModal />
+        </ModalProvider>
+      </NavigationContainer>
   );
 }

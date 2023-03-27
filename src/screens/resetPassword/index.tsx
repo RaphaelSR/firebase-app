@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Button, TextInput, useTheme } from "react-native-paper";
+import { createStyles } from "./styles";
 import ArrowBack from "../../components/arrowBack";
 import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
 import { useAuth } from "../../hooks/useAuth";
@@ -8,7 +9,7 @@ import { useAuth } from "../../hooks/useAuth";
 export default function ResetPassword() {
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
-
+  const styles = createStyles();
   const { resetPassword } = useAuth();
   const { colors } = useTheme();
 
@@ -55,26 +56,4 @@ export default function ResetPassword() {
   );
 }
 
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    alignItems: "center",
-    paddingHorizontal: 16,
-    justifyContent: "center",
-  },
-  input: {
-    marginTop: 8,
-  },
-  form: {
-    width: "100%",
-    marginTop: 16,
-  },
-  button: {
-    marginTop: 16,
-  },
-  errorText: {
-    color: "red",
-    fontSize: 12,
-    marginTop: 4,
-  },
-});
+const styles = StyleSheet.create({});

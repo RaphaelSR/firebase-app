@@ -10,6 +10,7 @@ const CustomModal: React.FC = () => {
     modalOnConfirm,
     modalConfirmButtonText,
     modalCancelButtonText,
+    modalContent,
   } = useContext(ModalContext);
 
   if (!modalVisible) {
@@ -19,26 +20,37 @@ const CustomModal: React.FC = () => {
   return (
     <View style={styles.modalOverlay}>
       <View style={styles.modalContent}>
-        <Text style={styles.modalMessage}>{modalMessage}</Text>
-        <View style={styles.modalButtons}>
-          <TouchableOpacity onPress={hideModal}>
-            <Text style={styles.modalButtonText}>
-              {modalCancelButtonText || "Cancel"}
-            </Text>
-          </TouchableOpacity>
-          {modalOnConfirm && (
-            <TouchableOpacity
-              onPress={() => {
-                modalOnConfirm();
-                hideModal();
-              }}
-            >
-              <Text style={styles.modalButtonText}>
-                {modalConfirmButtonText || "Confirm"}
-              </Text>
-            </TouchableOpacity>
-          )}
-        </View>
+        {modalContent ? (
+          <>
+            {modalMessage && (
+              <Text style={styles.modalMessage}>{modalMessage}</Text>
+            )}
+            {modalContent}
+          </>
+        ) : (
+          <>
+            <Text style={styles.modalMessage}>{modalMessage}</Text>
+            <View style={styles.modalButtons}>
+              <TouchableOpacity onPress={hideModal}>
+                <Text style={styles.modalButtonText}>
+                  {modalCancelButtonText || "Cancel"}
+                </Text>
+              </TouchableOpacity>
+              {modalOnConfirm && (
+                <TouchableOpacity
+                  onPress={() => {
+                    modalOnConfirm();
+                    hideModal();
+                  }}
+                >
+                  <Text style={styles.modalButtonText}>
+                    {modalConfirmButtonText || "Confirm"}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          </>
+        )}
       </View>
     </View>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
+import { createStyles } from "./styles";
 import { Text, Button, TextInput, useTheme } from "react-native-paper";
 import ArrowBack from "../../components/arrowBack";
 import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
@@ -10,6 +11,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(false);
   const [error, setError] = useState("");
+  const styles = createStyles();
   const [loading, setLoading] = useState(false);
 
   const { signup } = useAuth();
@@ -80,27 +82,3 @@ export default function SignUp() {
     </SafeAreaViewWrapper>
   );
 }
-
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    marginTop: 8,
-  },
-  form: {
-    width: "100%",
-    marginTop: 16,
-  },
-  button: {
-    marginTop: 16,
-  },
-  errorText: {
-    color: "red",
-    marginTop: 8,
-    textAlign: "center",
-  },
-});

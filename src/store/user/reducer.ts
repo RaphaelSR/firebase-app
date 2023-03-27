@@ -1,5 +1,5 @@
-import produce from 'immer';
-import {UserActionTypes, UserState} from './types';
+import produce from "immer";
+import { UserActionTypes, UserState } from "./types";
 
 const INITIAL_STATE: UserState = {
   user: null,
@@ -9,9 +9,9 @@ const INITIAL_STATE: UserState = {
 
 export default function user(
   state = INITIAL_STATE,
-  action: {type: UserActionTypes; payload: any},
+  action: { type: UserActionTypes; payload: any }
 ): UserState {
-  return produce(state, draft => {
+  return produce(state, (draft) => {
     switch (action.type) {
       case UserActionTypes.SIGN_IN_REQUEST:
         draft.loading = true;
@@ -33,6 +33,11 @@ export default function user(
         draft.user = null;
         draft.error = false;
         draft.loading = false;
+        break;
+      case UserActionTypes.UPDATE_AVATAR_URL:
+        if (draft.user && draft.user.uid === action.payload.uid) {
+          draft.user.photoURL = action.payload.avatarURL;
+        }
         break;
       default:
         break;
