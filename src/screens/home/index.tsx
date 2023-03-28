@@ -5,7 +5,6 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
-  Animated,
 } from "react-native";
 import { createStyles } from "./styles";
 import { Avatar, IconButton, useTheme } from "react-native-paper";
@@ -19,9 +18,9 @@ import {
 } from "../../store/todo/actions";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootState } from "../../store/rootState";
-import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
-import { AvatarWithGradient } from "../../components/avatarWithGradient.tsx";
-import NoteItem from "../../components/noteItem";
+import SafeAreaViewWrapper from "../../components/SafeAreaViewWrapper";
+import { AvatarWithGradient } from "../../components/AvatarWithGradient.tsx";
+import Note from "../../components/Note";
 
 type HomeScreenNavigationProp = NativeStackScreenProps<any>;
 
@@ -112,7 +111,7 @@ export function Home({ navigation }: HomeProps) {
           <FlatList
             data={todos}
             renderItem={({ item }) => (
-              <NoteItem
+              <Note
                 id={item.id}
                 title={item.title}
                 completed={item.completed}
@@ -124,6 +123,7 @@ export function Home({ navigation }: HomeProps) {
             keyExtractor={(item) => item.id}
             style={styles.noteList}
             contentContainerStyle={styles.noteListContent}
+            extraData={todos} // Adicionar extraData
           />
         </View>
       </View>

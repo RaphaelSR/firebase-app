@@ -10,8 +10,8 @@ import {
 import { Avatar, Button, useTheme } from "react-native-paper";
 import { createStyles } from "./styles";
 import { useAuth } from "../../hooks/useAuth";
-import ArrowBack from "../../components/arrowBack";
-import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
+import ArrowBack from "../../components/ArrowBack";
+import SafeAreaViewWrapper from "../../components/SafeAreaViewWrapper";
 import { ModalContext } from "../../contexts/modalContext";
 import { useThemeContext } from "../../contexts/themeContext";
 import {
@@ -20,8 +20,8 @@ import {
   MediaType,
   Callback,
 } from "react-native-image-picker";
-import { AvatarWithGradient } from "../../components/avatarWithGradient.tsx";
-import { DisplayNameInput } from "../../components/displayNameInput";
+import { AvatarWithGradient } from "../../components/AvatarWithGradient.tsx";
+import { DisplayNameInput } from "../../components/DisplayNameInput";
 
 export function Profile({ navigation }) {
   const {

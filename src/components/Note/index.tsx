@@ -1,11 +1,11 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { IconButton, useTheme } from "react-native-paper";
-import AnimatedNote from "../animatedNote";
+import AnimatedNoteText from "../AnimatedNoteText";
 
 import { createStyles } from "./styles";
 
-interface NoteItemProps {
+interface NoteProps {
   id: string;
   title: string;
   completed: boolean;
@@ -14,30 +14,31 @@ interface NoteItemProps {
   onDelete: (id: string) => void;
 }
 
-function NoteItem({
+function areEqual(prevProps: NoteProps, nextProps: NoteProps) {
+  return (
+    prevProps.title === nextProps.title &&
+    prevProps.completed === nextProps.completed
+  );
+}
+
+function Note({
   id,
   title,
   completed,
   onToggleStatus,
   onEdit,
   onDelete,
-}: NoteItemProps) {
+}: NoteProps) {
   const styles = createStyles();
   const { colors } = useTheme();
 
   return (
     <View style={styles.noteCard}>
-      <TouchableOpacity
+      <AnimatedNoteText
+        title={title}
+        completed={completed}
         onPress={() => onToggleStatus(id, title, completed)}
-        style={styles.noteContainer}
-      >
-        <AnimatedNote
-          title={title}
-          completed={completed}
-          id={id}
-          onPress={() => onToggleStatus(id, title, completed)}
-        />
-      </TouchableOpacity>
+      />
       <View style={styles.actionButtons}>
         <IconButton
           icon="pencil"
@@ -56,4 +57,4 @@ function NoteItem({
   );
 }
 
-export default NoteItem;
+export default React.memo(Note, areEqual);

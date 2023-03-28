@@ -4,7 +4,7 @@ import { AppRoutes } from "./app.routes";
 import { AuthRoutes } from "./auth.routes";
 import { useAuth } from "../hooks/useAuth";
 import { ModalProvider } from "../contexts/modalContext";
-import CustomModal from "../components/customModal";
+import CustomModal from "../components/CustomModal";
 
 export function Routes() {
   const { currentUser } = useAuth();

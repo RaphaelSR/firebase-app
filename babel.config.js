@@ -1,11 +1,11 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: ["module:metro-react-native-babel-preset"],
   plugins: [
     [
-      'module:react-native-dotenv',
+      "module:react-native-dotenv",
       {
-        moduleName: '@env',
-        path: '.env',
+        moduleName: "@env",
+        path: ".env",
         blacklist: null,
         whitelist: null,
         safe: false,
@@ -13,25 +13,26 @@ module.exports = {
       },
     ],
     [
-      'module-resolver',
+      "module-resolver",
       {
-        root: ['./src'],
-        extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
+        root: ["./src"],
+        extensions: [".ios.js", ".android.js", ".js", ".ts", ".tsx", ".json"],
         alias: {
-          tests: ['./tests/'],
-          '@components': './src/components',
-          '@screen': 'src/screen/*',
-          '@data': 'src/data/*',
-          '@styles': 'src/styles/*',
-          '@services': 'src/services/*',
-          '@config': 'src/config/*',
+          tests: ["./tests/"],
+          "@components": "./src/components",
+          "@screen": "src/screen/*",
+          "@data": "src/data/*",
+          "@styles": "src/styles/*",
+          "@services": "src/services/*",
+          "@config": "src/config/*",
         },
       },
     ],
+    "react-native-reanimated/plugin",
   ],
   env: {
     production: {
-      plugins: ['react-native-paper/babel'],
+      plugins: ["react-native-paper/babel"],
     },
   },
 };

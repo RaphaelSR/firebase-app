@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { createStyles } from "./styles";
 import { Text, Button, TextInput, useTheme } from "react-native-paper";
-import ArrowBack from "../../components/arrowBack";
-import SafeAreaViewWrapper from "../../components/safeAreaViewWrapper";
+import ArrowBack from "../../components/ArrowBack";
+import SafeAreaViewWrapper from "../../components/SafeAreaViewWrapper";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function SignUp() {
