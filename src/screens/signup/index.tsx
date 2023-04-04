@@ -9,6 +9,7 @@ import { useAuth } from "../../hooks/useAuth";
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(false);
   const [error, setError] = useState("");
   const styles = createStyles();
@@ -21,10 +22,10 @@ export default function SignUp() {
     try {
       setLoading(true);
       setError("");
-      if (!email || !password) {
+      if (!email || !password || !firstName) {
         throw new Error("Preencha todos os campos");
       }
-      await signup(email, password);
+      await signup(email, password, firstName);
     } catch (e) {
       setError(
         "Falha ao cadastrar. Verifique suas credenciais e tente novamente."
@@ -46,6 +47,13 @@ export default function SignUp() {
           Signup
         </Text>
         <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            label="Primeiro nome"
+            value={firstName}
+            onChangeText={setFirstName}
+            mode="outlined"
+          />
           <TextInput
             style={styles.input}
             label="Email"

@@ -35,7 +35,6 @@ export function Home({ navigation }: HomeProps) {
   const dispatch = useDispatch();
   const { colors } = useTheme();
   const styles = createStyles();
-
   const [isTextInputFocused, setIsTextInputFocused] = useState(false);
 
   const handleEditNote = (id: string, title: string) => {

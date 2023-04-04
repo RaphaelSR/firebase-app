@@ -42,12 +42,13 @@ export function useAuth(): AuthData {
     dispatch(signInRequest(email, password));
   };
 
-  const signup = async (email: string, password: string) => {
+  const signup = async (email: string, password: string, firstName: string) => { 
     const userCredential = await auth().createUserWithEmailAndPassword(
       email,
       password
     );
     setToken(userCredential.user.uid);
+    await userCredential.user.updateProfile({ displayName: firstName }); 
   };
 
   const resetPassword = async (email: string) => {
